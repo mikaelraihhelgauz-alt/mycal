@@ -1,3 +1,9 @@
+import { createClient } from '@supabase/supabase-js'
+
+const supabaseUrl = 'https://mxqrhijblmnyeusciipa.supabase.co'
+const supabaseKey = process.env.SUPABASE_KEY
+const supabase = createClient(supabaseUrl, supabaseKey)
+
 // ------------------------
 // Grabs you already have:
 const table = document.getElementById("nutritionTable").querySelector("tbody");
