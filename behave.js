@@ -22,11 +22,6 @@ document.getElementById("loginBtn").onclick = async () => {
   if (error) alert(error.message);
 };
 
-// Log out
-document.getElementById("logoutBtn").onclick = async () => {
-  await supabase.auth.signOut();
-};
-
 supabase.auth.onAuthStateChange((event, session) => {
   if (session) {
     // logged in
