@@ -4,6 +4,31 @@ const supabaseUrl = 'https://mxqrhijblmnyeusciipa.supabase.co'
 const supabaseKey = process.env.SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
+
+// Sign up
+document.getElementById("signupBtn").onclick = async () => {
+  const { error } = await supabase.auth.signUp({
+    email: document.getElementById("email").value,
+    password: document.getElementById("password").value,
+  });
+  if (error) alert(error.message);
+};
+
+// Log in
+document.getElementById("loginBtn").onclick = async () => {
+  const { error } = await supabase.auth.signInWithPassword({
+    email: document.getElementById("email").value,
+    password: document.getElementById("password").value,
+  });
+  if (error) alert(error.message);
+};
+
+// Log out
+document.getElementById("logoutBtn").onclick = async () => {
+  await supabase.auth.signOut();
+};
+
+
 // ------------------------
 // Grabs you already have:
 const table = document.getElementById("nutritionTable").querySelector("tbody");
@@ -224,6 +249,29 @@ document.querySelectorAll(".tab-button").forEach(btn => {
     }
   });
 });
+
+
+async function saveEntry(date, kcal, protein) {
+  const user = (await supabase.auth.getUser()).data.user;
+  if (!user) {
+    alert("Please log in first");
+    return;
+  }
+  const { error } = await supabase
+    .from("entries")
+    .insert([{ user_id: user.id, date, kcal, protein }]);
+  if (error) alert(error.message);
+}
+
+async function loadEntries() {
+  const { data, error } = await supabase
+    .from("entries")
+    .select("date, kcal, protein")
+    .order("date");
+  if (error) alert(error.message);
+  return data;
+}
+
 
 
 
