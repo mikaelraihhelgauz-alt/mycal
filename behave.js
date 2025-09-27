@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 
 const supabaseUrl = 'https://mxqrhijblmnyeusciipa.supabase.co'
-const supabaseKey = process.env.SUPABASE_KEY
+const supabaseKey = process.env.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im14cXJoaWpibG1ueWV1c2NpaXBhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkwMDYwNDcsImV4cCI6MjA3NDU4MjA0N30.d7EiLecW7fOqkXrjUx8E0EMWxzyRwvSuc7rnhhiyPzI
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 
@@ -27,6 +27,19 @@ document.getElementById("loginBtn").onclick = async () => {
 document.getElementById("logoutBtn").onclick = async () => {
   await supabase.auth.signOut();
 };
+
+supabase.auth.onAuthStateChange((event, session) => {
+  if (session) {
+    // logged in
+    document.getElementById("loginPage").style.display = "none";
+    document.getElementById("trackerPage").style.display = "block";
+  } else {
+    // logged out
+    document.getElementById("loginPage").style.display = "block";
+    document.getElementById("trackerPage").style.display = "none";
+  }
+});
+
 
 
 // ------------------------
