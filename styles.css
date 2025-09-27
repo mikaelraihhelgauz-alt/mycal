@@ -109,7 +109,7 @@ tfoot th {
 }
 
 /* Log the day button */
-#logDayBtn {
+#logDayBtn, #signupBtn {
   margin-top: 20px;              /* space above */
   padding: 10px 20px;
   background: #333;
