@@ -109,7 +109,7 @@ tfoot th {
 }
 
 /* Log the day button */
-#logDayBtn, #signupBtn {
+#logDayBtn, #signupBtn, #loginBtn {
   margin-top: 20px;              /* space above */
   padding: 10px 20px;
   background: #333;
@@ -121,11 +121,11 @@ tfoot th {
   transition: background 0.2s, transform 0.1s;
 }
 
-#logDayBtn:hover {
+#logDayBtn:hover, #signupBtn:hover, #loginBtn:hover {
   background: #444;
 }
 
-#logDayBtn:active {
+#logDayBtn:active, #signupBtn:active, #loginBtn:active {
   transform: scale(0.97);        /* subtle press effect */
 }
 
