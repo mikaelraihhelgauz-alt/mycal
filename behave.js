@@ -36,6 +36,23 @@ supabase.auth.onAuthStateChange((event, session) => {
 });
 
 
+// sign-out listener
+supabase.auth.onAuthStateChange((event, session) => {
+  if (event === 'SIGNED_OUT') {
+    console.log('SIGNED_OUT', session)
+    // clear local and session storage
+    [
+      window.localStorage,
+      window.sessionStorage,
+    ].forEach((storage) => {
+      Object.entries(storage)
+        .forEach(([key]) => {
+          storage.removeItem(key)
+        })
+    })
+  }
+})
+
 
 // ------------------------
 // Grabs you already have:
